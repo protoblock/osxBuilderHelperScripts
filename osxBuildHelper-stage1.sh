@@ -28,7 +28,7 @@ LIBSFOLDER=$APPFolder/Contents/Frameworks
 QTDIR=$2
 
 ## these are the QML(ONLY) libs that do not get pulled in by macdeployqt
-EXQMLLIBSARRAY=($QTDIR/qml/ProRotoQml $QTDIR/qml/Communi $QTDIR/qml/Material $QTDIR/qml/QtQuick/XmlListModel )
+EXQMLLIBSARRAY=($QTDIR/qml/ProRotoQml $QTDIR/qml/Communi $QTDIR/qml/Material $QTDIR/qml/QtQuick )
 
 ## Add more if needed
 EXLIBSARRAY=($QTDIR/lib/IrcCore.framework $QTDIR/lib/IrcModel.framework $QTDIR/lib/IrcUtil.framework $QTDIR/lib/libprotoblock-core.1.0.0.dylib )
@@ -70,6 +70,8 @@ for ii in ${EXLIBSARRAY[@]};
 do
 	cp -r ${ii} $LIBSFOLDER/
 done
+
+
 
 ##### TODO 
 ## REMOVE ALL THE DEBUGING LIBS, 
