@@ -13,7 +13,7 @@
 #
 #
 # script to build and send to apples stores
-
+set -x 
 ## fixme gloabal var's
 ## the .app path 
 ## Example /Users/satoshi/Desktop/fc/ios/build-ProRoto2016-qt5_6-Release/Applications/ProtoBlock2016/ProtoBlock2016.app
@@ -40,8 +40,9 @@ EXLIBSARRAY=($QTDIR/lib/IrcCore.framework $QTDIR/lib/IrcModel.framework $QTDIR/l
 
 $QTDIR/bin/macdeployqt \
 	$APPFolder \
-	-qmldir=$QTDIR/qml \
-	-verbose=3
+	-qmldir=$QTDIR/qml 
+	# \
+	# -verbose=3
 
 ############
 # copy 3rdparty and misc libs
@@ -83,17 +84,17 @@ done
 cd $QMLPLUGINS/Communi/
 
 install_name_tool -change \
-	/Users/satoshi/Qt/5.6/clang_64/lib/IrcUtil.framework/Versions/3/IrcUtil \
+	$QTDIR/lib/IrcUtil.framework/Versions/3/IrcUtil \
 	@rpath/IrcUtil.framework/Versions/3/IrcUtil \
 	libcommuniplugin.dylib
 
 install_name_tool -change \
-	/Users/satoshi/Qt/5.6/clang_64/lib/IrcModel.framework/Versions/3/IrcIrcModel \
+	$QTDIR/lib/IrcModel.framework/Versions/3/IrcModel \
 	@rpath/IrcModel.framework/Versions/3/IrcModel \
 	libcommuniplugin.dylib
 
 install_name_tool -change \
-	/Users/satoshi/Qt/5.6/clang_64/lib/IrcCore.framework/Versions/3/IrcCore \
+	$QTDIR/lib/IrcCore.framework/Versions/3/IrcCore \
 	@rpath/IrcCore.framework/Versions/3/IrcCore \
 	libcommuniplugin.dylib
 

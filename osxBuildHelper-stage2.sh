@@ -30,8 +30,7 @@ KeyInstallerString=$3
 ###########
 
 cd $APPFolder/
-## framework files
-find Contents  -name "*.framework" -exec codesign --verbose --force --sign "$2" {} \;
+
 ##dylibs dylib
 find Contents  -name "*.dylib" -exec codesign --verbose --force --sign "$2" {} \;
 ## .a
@@ -46,6 +45,8 @@ find Contents  -name "*.js" -exec codesign --verbose --force --sign "$2" {} \;
 find Contents  -name "*.qmltypes" -exec codesign --verbose --force --sign "$2" {} \;
 # .png
 find Contents  -name "*.png" -exec codesign --verbose --force --sign "$2" {} \;
+## framework files
+find Contents  -name "*.framework" -exec codesign --verbose --force --sign "$2" {} \;
 
 ## cd up a level to sign the app
 cd $APPFolder
