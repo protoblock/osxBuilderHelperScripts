@@ -12,7 +12,7 @@
 # contact@protoblock.com
 #
 #
-
+set -x
 
 ## fixme gloabal var's
 ## the .app path 
@@ -31,21 +31,21 @@ KeyInstallerString=$3
 
 cd $APPFolder/
 ## framework files
-find Contents  -name "*.framework" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "*.framework" -exec codesign --verbose --force --sign "$2" {} \;
 ##dylibs dylib
-find Contents  -name "*.dylib" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "*.dylib" -exec codesign --verbose --force --sign "$2" {} \;
 ## .a
-find Contents  -name "*.a" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "*.a" -exec codesign --verbose --force --sign "$2" {} \;
 ## .qml
-find Contents  -name "*.qml" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "*.qml" -exec codesign --verbose --force --sign "$2" {} \;
 ## qmldir
-find Contents  -name "qmldir" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "qmldir" -exec codesign --verbose --force --sign "$2" {} \;
 ## .js
-find Contents  -name "*.js" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "*.js" -exec codesign --verbose --force --sign "$2" {} \;
 # *.qmltypes
-find Contents  -name "*.qmltypes" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "*.qmltypes" -exec codesign --verbose --force --sign "$2" {} \;
 # .png
-find Contents  -name "*.png" -exec codesign --verbose --force --sign $2 {} \;
+find Contents  -name "*.png" -exec codesign --verbose --force --sign "$2" {} \;
 
 ## cd up a level to sign the app
 cd $APPFolder
@@ -56,10 +56,10 @@ cd ../
 #codesign --verbose --force --sign "3rd Party Mac Developer Application: Satoshi Fantasy LLC (TT9VX67592)"  --entitlements ProtoBlock2016.app/Contents/ProtoBlock2016.entitlements ProtoBlock2016.app ;
 
 ## without entitlements
-codesign --verbose --force --sign $2 ProtoBlock2016.app
+codesign --verbose --force --sign "$2" ProtoBlock2016.app
 
 ## Build the application into a pkg
-productbuild --component ProtoBlock2016.app /Applications --sign $3 ProtoBlock2016.pkg
+productbuild --component ProtoBlock2016.app /Applications --sign "$3" ProtoBlock2016.pkg
 
 ## make sure that it is ok for store
-sudo installer -store -pkg ProtoBlock2016.pkg -target /Applications
+sudo installer -store -pkg ProtoBlock2016.pkg -target /

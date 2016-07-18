@@ -14,11 +14,11 @@
 # This is a simple example of how to run the osxBuilderHelper scripts
 #
 
-osxBuildHelper-stage1.sh \
+/Users/satoshi/keysForStores/osxBuilderScripts/osxBuildHelper-stage1.sh \
 	$HOME/deploy/ProtoBlock2016.app \
 	$HOME/Qt/5.6/clang_64
 
-osxBuildHelper-stage2.sh \
+/Users/satoshi/keysForStores/osxBuilderScripts/osxBuildHelper-stage2.sh \
 	$HOME/deploy/ProtoBlock2016.app \
 	"3rd Party Mac Developer Application: Satoshi Fantasy LLC (TT9VX67592)" \
 	"3rd Party Mac Developer Installer: Satoshi Fantasy LLC (TT9VX67592)"
