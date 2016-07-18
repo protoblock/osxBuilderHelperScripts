@@ -61,6 +61,7 @@ if [ $entitlements == "y" ];
 then
 	echo "Where is the full path to the entitlements located ? "
 	read entitl
+	cp $entitl $APPFolder/Contents/
 	codesign --verbose --force --sign "$2"  --entitlements "$entitl" ProtoBlock2016.app ;
 else
 	## without entitlements
