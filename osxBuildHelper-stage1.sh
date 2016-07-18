@@ -85,39 +85,42 @@ cd $QMLPLUGINS/Communi/
 install_name_tool -change \
 	/Users/satoshi/Qt/5.6/clang_64/lib/IrcUtil.framework/Versions/3/IrcUtil \
 	@rpath/IrcUtil.framework/Versions/3/IrcUtil \
-	IrcUtil 
+	libcommuniplugin.dylib
 
 install_name_tool -change \
 	/Users/satoshi/Qt/5.6/clang_64/lib/IrcModel.framework/Versions/3/IrcIrcModel \
 	@rpath/IrcModel.framework/Versions/3/IrcModel \
-	IrcModel
+	libcommuniplugin.dylib
 
 install_name_tool -change \
 	/Users/satoshi/Qt/5.6/clang_64/lib/IrcCore.framework/Versions/3/IrcCore \
 	@rpath/IrcCore.framework/Versions/3/IrcCore \
-	IrcCore
+	libcommuniplugin.dylib
 
 
 ## For Lib protoblock-qml plugin
-cd $QMLPLUGINS/Protoblock
+cd $QMLPLUGINS/ProRotoQml/Protoblock
 
 install_name_tool -change \
 	libprotoblock-core.1.dylib \
 	@rpath/libprotoblock-core.1.dylib \
-	libprotoblock-core.1.dylib
+	libProRotoQml.Protoblock.dylib
 
 ## For some reason levelDB is getting linked into the wrong place (most likly deps.pri)
 install_name_tool -change \
 	/usr/local/opt/leveldb/lib/libleveldb.1.dylib \
-	@rpath/libleveldb.1.dylib
+	@rpath/libleveldb.1.dylib \
+	libProRotoQml.Protoblock.dylib
 
 # and at last change up the libprotoblock-core
 ## Again with the damn leveldb
 
 cd $LIBSFOLDER
+
 install_name_tool -change \
 	/usr/local/opt/leveldb/lib/libleveldb.1.dylib \
-	@rpath/libleveldb.1.dylib
+	@rpath/libleveldb.1.dylib \
+	libprotoblock-core.1.dylib
 
 
 
