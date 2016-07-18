@@ -13,9 +13,11 @@
 #
 #
 # script to build and send to apples stores
-set -x 
-## fixme gloabal var's
-## the .app path 
+
+# set -x 
+
+
+## The .app path 
 ## Example /Users/satoshi/Desktop/fc/ios/build-ProRoto2016-qt5_6-Release/Applications/ProtoBlock2016/ProtoBlock2016.app
 APPFolder=$1    
 ## Qml Dir's 

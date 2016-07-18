@@ -12,7 +12,7 @@
 # contact@protoblock.com
 #
 #
-set -x
+# set -x
 
 ## fixme gloabal var's
 ## the .app path 
