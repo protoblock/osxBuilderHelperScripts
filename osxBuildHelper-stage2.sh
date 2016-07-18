@@ -54,10 +54,18 @@ cd ../
 
 ## Sign the app
 ## With entitlements
-#codesign --verbose --force --sign "3rd Party Mac Developer Application: Satoshi Fantasy LLC (TT9VX67592)"  --entitlements ProtoBlock2016.app/Contents/ProtoBlock2016.entitlements ProtoBlock2016.app ;
+echo "Would you like to sign this appplication with entitlements ? [y/n]"
+read entitlements
 
-## without entitlements
-codesign --verbose --force --sign "$2" ProtoBlock2016.app
+if [ $entitlements == "y" ];
+then
+	echo "Where is the full path to the entitlements located ? "
+	read entitl
+	codesign --verbose --force --sign "$2"  --entitlements "$entitl" ProtoBlock2016.app ;
+else
+	## without entitlements
+	codesign --verbose --force --sign "$2" ProtoBlock2016.app
+fi
 
 ## Build the application into a pkg
 productbuild --component ProtoBlock2016.app /Applications --sign "$3" ProtoBlock2016.pkg
