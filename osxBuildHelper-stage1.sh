@@ -33,7 +33,7 @@ QTDIR=$2
 EXQMLLIBSARRAY=($QTDIR/qml/ProRotoQml $QTDIR/qml/Communi $QTDIR/qml/Material $QTDIR/qml/QtQuick )
 
 ## Add more if needed
-EXLIBSARRAY=($QTDIR/lib/IrcCore.framework $QTDIR/lib/IrcModel.framework $QTDIR/lib/IrcUtil.framework $QTDIR/lib/libprotoblock-core.1.0.0.dylib /usr/local/opt/leveldb/lib/libleveldb.1.dylib)
+EXLIBSARRAY=($QTDIR/lib/IrcCore.framework $QTDIR/lib/IrcModel.framework $QTDIR/lib/IrcUtil.framework $QTDIR/lib/libprotoblock-core.1.0.0.dylib /usr/local/opt/leveldb/lib/libleveldb.1.dylib )
 
 
 ###########
@@ -125,7 +125,7 @@ cd $LIBSFOLDER
 install_name_tool -change \
 	/usr/local/opt/leveldb/lib/libleveldb.1.dylib \
 	@rpath/libleveldb.1.dylib \
-	libprotoblock-core.1.dylib
+	libprotoblock-core.1.0.0.dylib
 
 
 
