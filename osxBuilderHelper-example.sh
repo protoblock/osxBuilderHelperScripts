@@ -14,12 +14,54 @@
 # This is a simple example of how to run the osxBuilderHelper scripts
 #
 
-/Users/satoshi/keysForStores/osxBuilderScripts/osxBuildHelper-stage1.sh \
-	$HOME/deploy/ProtoBlock2016.app \
-	$HOME/Qt/5.6/clang_64
 
-/Users/satoshi/keysForStores/osxBuilderScripts/osxBuildHelper-stage2.sh \
-	$HOME/deploy/ProtoBlock2016.app \
-	"3rd Party Mac Developer Application: Satoshi Fantasy LLC (TT9VX67592)" \
-	"3rd Party Mac Developer Installer: Satoshi Fantasy LLC (TT9VX67592)"
+echo "would you like to clear the std each time ? [y/n]"
+read ClearSTD;
+
+
+###################
+## Stage One
+###################
+echo "would you like to run stage one ? [y/n]"
+read stageOne;
+
+if [[ $ClearSTD == "y" ]];
+then
+	clear;
+fi
+
+
+if [[ $stageOne == "y" ]];
+then
+	/Users/satoshi/keysForStores/osxBuilderScripts/osxBuildHelper-stage1.sh \
+		$HOME/deploy/ProtoBlock2016.app \
+		$HOME/Qt/5.6/clang_64
+fi
+
+
+if [[ $ClearSTD == "y" ]];
+then
+	clear;
+fi
+
+
+
+#####################
+## Stage Two
+#####################
+echo "Would you like to run stage Two ? [y/n]"
+read stageTwo;
+if [[ $ClearSTD == "y" ]];
+then
+	clear;
+fi
+if [[ $stageTwo == "y" ]];
+then
+	/Users/satoshi/keysForStores/osxBuilderScripts/osxBuildHelper-stage2.sh \
+		$HOME/deploy/ProtoBlock2016.app \
+		"3rd Party Mac Developer Application: Satoshi Fantasy LLC (TT9VX67592)" \
+		"3rd Party Mac Developer Installer: Satoshi Fantasy LLC (TT9VX67592)"
+fi
+
+
 

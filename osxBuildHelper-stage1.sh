@@ -33,7 +33,7 @@ QTDIR=$2
 EXQMLLIBSARRAY=($QTDIR/qml/ProRotoQml $QTDIR/qml/Communi $QTDIR/qml/Material $QTDIR/qml/QtQuick )
 
 ## Add more if needed
-EXLIBSARRAY=($QTDIR/lib/IrcCore.framework $QTDIR/lib/IrcModel.framework $QTDIR/lib/IrcUtil.framework $QTDIR/lib/libprotoblock-core.1.0.0.dylib /usr/local/opt/leveldb/lib/libleveldb.1.dylib )
+EXLIBSARRAY=($QTDIR/lib/IrcCore.framework $QTDIR/lib/IrcModel.framework $QTDIR/lib/IrcUtil.framework $QTDIR/lib/libprotoblock-core.1.0.0.dylib )
 
 
 ###########
@@ -78,13 +78,32 @@ done
 ##### TODO 
 ## REMOVE ALL THE DEBUGING LIBS, 
 
+# DEBUGLIBS=();
+
+# cd $APPFolder
+
+# while read -r lib;
+# do 
+# debuglibs+=("$lib");
+# done < <(find . -type f -name '*_debug.dylib');
+
+
+# printf '%s\n' "${debuglibs[@]}"
+
+
+
+
+# echo "would you like to remove these ? [y/n]"
+
 
 
 ##############
 # Run install_name_tool -change on 3rd party libs
 ##############
 
-## For the IRC mods
+#########################
+## For the IRC QML plugin
+#########################
 cd $QMLPLUGINS/Communi/
 
 install_name_tool -change \
@@ -102,32 +121,57 @@ install_name_tool -change \
 	@rpath/IrcCore.framework/Versions/3/IrcCore \
 	libcommuniplugin.dylib
 
-
-## For Lib protoblock-qml plugin
+################
+## For Lib protoblock-qml /  plugin
+################
 cd $QMLPLUGINS/ProRotoQml/Protoblock
-
 install_name_tool -change \
 	libprotoblock-core.1.dylib \
-	@rpath/libprotoblock-core.1.dylib \
+	@rpath/libprotoblock-core.1.0.0.dylib \
 	libProRotoQml.Protoblock.dylib
 
-## For some reason levelDB is getting linked into the wrong place (most likly deps.pri)
+
+
+
+## ODD we now have to chabnge the ID's of some of them and the paths for others .......
+## 
+######################
+## IrcCore.framework
+######################
+cd $LIBSFOLDER/IrcCore.framework/Versions/3
+install_name_tool -id \
+	@rpath/IrcCore.framework/Versions/3/IrcCore \
+	IrcCore
+
+
+####################
+## IrcModel.framework
+####################
+cd $LIBSFOLDER/IrcModel.framework/Versions/3
+install_name_tool -id \
+	@rpath/IrcModel.framework/Versions/3/IrcModel \
+	IrcModel
+
 install_name_tool -change \
-	/usr/local/opt/leveldb/lib/libleveldb.1.dylib \
-	@rpath/libleveldb.1.dylib \
-	libProRotoQml.Protoblock.dylib
+	$QTDIR/lib/IrcCore.framework/Versions/3/IrcCore \
+	@rpath/IrcCore.framework/Versions/3/IrcCore \
+	IrcModel
 
-# and at last change up the libprotoblock-core
-## Again with the damn leveldb
-
-cd $LIBSFOLDER
+###############
+## IrcUtil.framework/
+###############
+cd $LIBSFOLDER/IrcUtil.framework/Versions/3
+install_name_tool -id @rpath/IrcUtil.framework/Versions/3/IrcUtil IrcUtil
 
 install_name_tool -change \
-	/usr/local/opt/leveldb/lib/libleveldb.1.dylib \
-	@rpath/libleveldb.1.dylib \
-	libprotoblock-core.1.0.0.dylib
+	$QTDIR/lib/IrcCore.framework/Versions/3/IrcCore \
+	@rpath/IrcCore.framework/Versions/3/IrcCore \
+	IrcUtil
 
-
+install_name_tool \
+	-change $QTDIR/lib/IrcModel.framework/Versions/3/IrcModel \
+	@rpath/IrcModel.framework/Versions/3/IrcModel \
+	IrcUtil
 
 
 ## FIXME  
@@ -138,13 +182,4 @@ read plist
 
 cp $plist $APPFolder/Contents/
 
-
-
 echo "Ok all done run stage 2"
-
-
-
-
-
-
-

@@ -29,6 +29,12 @@ KeyInstallerString=$3
 ## Sign all the Qt Frameworks and 3rdparty Libs
 ###########
 
+echo "Would you like to sign Sign all the Qt Frameworks and 3rdparty Lib? [y/n]"
+read signall
+
+if [ $signall == "y" ];
+then
+
 cd $APPFolder/
 
 ##dylibs dylib
@@ -47,6 +53,7 @@ find Contents  -name "*.qmltypes" -exec codesign --verbose --force --sign "$2" {
 find Contents  -name "*.png" -exec codesign --verbose --force --sign "$2" {} \;
 ## framework files
 find Contents  -name "*.framework" -exec codesign --verbose --force --sign "$2" {} \;
+fi
 
 ## cd up a level to sign the app
 cd $APPFolder
