@@ -23,7 +23,7 @@ This is the first thing that happens it takes two arguments
 2. The place where Qt is installed and the version with the toolchain
     - Example:  /Qt/5.6/clang_64 ****Important**** Make sure that you do NOT add a / at the end of the path
 
-****IMPORTANT****
+***IMPORTANT***
 
 At the End of this script you will be asked where the Info.plist is located. This is needed because Qmake is dumb sometimes and does not understand how to not deploy the default Info.plist that comes with Qt
 
@@ -34,39 +34,38 @@ At the End of this script you will be asked where the Info.plist is located. Thi
 This is where the signing happens and the pkg is made.
 
 This script takes in 3 arguments
+
 1. The full path to the .app
     - Example:  /Users/someone/deploy/ProtoBlock2016.app
-2. The ****APPLICATION**** developers key. This must be in quotes
+
+2. The ***APPLICATION*** developers key. This must be in quotes
     - Example "3rd Party Mac Developer Application: Satoshi Fantasy LLC (XXXXXXXXXX)"
-3. The ****INSTALLERS**** developers key. This must be in quotes
+
+3. The ***INSTALLERS*** developers key. This must be in quotes
     - Example: "3rd Party Mac Developer Installer: Satoshi Fantasy LLC (XXXXXXXXXX)"
 
 
 At the end of this you will be asked for your password.  This is used for the installer tool. See the documentation below for isntaller tools
 
 
-
-
 #### Tools Used
 
-
-****Install_name_tool****
+___
+***Install_name_tool***
+___
 
 DESCRIPTION:
 
-       Install_name_tool changes the dynamic shared library install names  and
-       or  adds,  changes  or  deletes the rpaths recorded in a Mach-O binary.
-       For this tool to work when the install names or rpaths are  larger  the
-       binary  should  be  built  with  the ld(1) -headerpad_max_install_names
-       option.
+Install_name_tool changes the dynamic shared library install names  and or  adds,  changes  or  deletes the rpaths recorded in a Mach-O binary. For this tool to work when the install names or rpaths are  larger  the binary  should  be  built  with  the ld(1) -headerpad_max_install_names option.
 
 see also 
 ````bash
 installer_name_tool
 ````
 
-
-****installer****
+___
+***installer***
+___
 
 DESCRIPTION:
 
@@ -83,43 +82,40 @@ see also
 man installer
 ````
 
-
-****macdeployqt****
+___
+***macdeployqt***
+___
 
 DESCRIPTION:
 
 The Mac deployment tool can be found in QTDIR/bin/macdeployqt. It is designed to automate the process of creating a deployable application bundle that contains the Qt libraries as private frameworks.
 
+see also [macdeployqt](http://doc.qt.io/qt-5/osx-deployment.html#the-mac-deployment-tool)
 
-
-****codesign****
-
-DESCRIPTION:
-
-     The codesign command is used to create, check, and display code signa-
-     tures, as well as inquire into the dynamic status of signed code in the
-     system.
-
-     codesign requires exactly one operation option to determine what action
-     is to be performed, as well as any number of other options to modify its
-     behavior. It can act on any number of objects per invocation, but per-
-     forms the same operation on all of them.
-
-     codesign accepts single-character (classic) options, as well as GNU-style
-     long options of the form --name and --name=value. Common options have
-     both forms; less frequent and specialized options have only long form.
-     Note that the form --name value (without equal sign) will not work as
-     expected on options with optional values.
-
-
-****productbuild****
+___
+***codesign***
+___
 
 DESCRIPTION:
 
-     A product archive is a flat file with a .pkg extension.  productbuild
-     creates a deployable product archive, which can be used with the OS X
-     Installer, or submitted to the Mac App Store. It has 5 different modes,
-     as shown in the SYNOPSIS above:
+The codesign command is used to create, check, and display code signa- tures, as well as inquire into the dynamic status of signed code in the system.
+
+codesign requires exactly one operation option to determine what action is to be performed, as well as any number of other options to modify its behavior. It can act on any number of objects per invocation, but per- forms the same operation on all of them.
+
+codesign accepts single-character (classic) options, as well as GNU-style long options of the form --name and --name=value. Common options have both forms; less frequent and specialized options have only long form. Note that the form --name value (without equal sign) will not work as expected on options with optional values.
+
+see also 
+````bash 
+man codesign
+````
+
+___
+***productbuild***
+___
+
+DESCRIPTION:
+
+A product archive is a flat file with a .pkg extension.  productbuild creates a deployable product archive, which can be used with the OS X Installer, or submitted to the Mac App Store. It has 5 different modes, as shown in the SYNOPSIS above:
 
 1.   Create a product archive from a bundle (e.g. for the Mac App Store). If you have a self-contained bundle (e.g. an app) that always gets installed to the same location (e.g.  /Applications), specify the bundle and install path using the --component option. You can spec- ify additional requirements using a PRE-INSTALL REQUIREMENTS PROPERTY LIST.  When you specify a bundle, productbuild automati- cally creates a component package, much like pkgbuild(1), and syn- thesizes a distribution file.
 2.   Create a product archive for in-app content. Specify in-app content using the --content option.
